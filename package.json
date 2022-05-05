@@ -1,0 +1,29 @@
+{
+  "name": "foundryvtt-miro-connector",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A module to embed miro boards within FVTT.",
+  "license": "MIT",
+  "author": "DarKDinDoN",
+  "scripts": {
+    "build": "gulp build",
+    "gulp": "gulp"
+  },
+  "browserslist": [
+    "last 3 versions"
+  ],
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.17.0",
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jsdoc": "^38.0.6",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "prettier": "^2.6.0",
+    "prettier-plugin-organize-imports": "^2.3.4",
+    "prettier-plugin-packagejson": "^2.2.16",
+    "sass": "^1.49.9"
+  }
+}

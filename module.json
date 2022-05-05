@@ -1,0 +1,29 @@
+{
+  "name": "foundryvtt-miro-connector",
+  "title": "Foundry VTT Miro Connector",
+  "description": "A module to embed miro boards within FVTT.",
+  "version": "1.0.0",
+  "author": "DarkDinDoN",
+  "authors": [
+    {
+      "name": "DarKDinDoN",
+      "url": "https://github.com/DarKDinDoN",
+      "discord": "Maxime#1562"
+    }
+  ],
+  "system": [],
+  "esmodules": ["./modules/module.js"],
+  "scripts": [],
+  "styles": ["./styles/module.css"],
+  "languages": [],
+  "dependencies": [],
+  "minimumCoreVersion": "9",
+  "compatibleCoreVersion": "9",
+  "url": "https://github.com/DarKDinDoN/foundryvtt-miro-connector",
+  "bugs": "https://github.com/DarKDinDoN/foundryvtt-miro-connector/issues",
+  "changelog": "https://github.com/DarKDinDoN/foundryvtt-miro-connector/releases",
+  "manifest": "https://github.com/DarKDinDoN/foundryvtt-miro-connector/releases/latest/download/module.json",
+  "download": "https://github.com/DarKDinDoN/foundryvtt-miro-connector/releases/latest/download/module.zip",
+  "license": "https://github.com/DarKDinDoN/foundryvtt-miro-connector/raw/main/LICENSE",
+  "readme": "https://github.com/DarKDinDoN/foundryvtt-miro-connector/raw/main/README.md"
+}

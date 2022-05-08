@@ -1,0 +1,37 @@
+{
+  "foundryvtt-miro-connector": {
+    "settings": {
+      "display-board-name": "Activate Miro board",
+      "display-board-hint": "Display the board within Foundry VTT.",
+      "board-id-name": "Miro board ID (mandatory)",
+      "board-id-hint": "You can find the board ID in the URL of you board: https://miro.com/app/board/YOUR-ID-HERE/.",
+      "access-token-name": "Miro access token (necessary to use the Miro API and send data to the board)",
+      "access-token-hint": "You can find the access token by creating an app. Generate a token without time limit.",
+      "cors-proxy-url-name": "CORS proxy URL (necessary to use the Miro API and send data to the board)",
+      "cors-proxy-url-hint": "Mandatory to avoid CORS issues with the Miro API from the browser. All requests will be sent through this proxy this way: https://cors-proxy-url/https://miro-api-url/ (the CORS proxy needs to be secure with HTTPS).",
+      "player-api-access-name": "Player can upload to Miro",
+      "player-api-access-hint": "If checked, players will be able to upload files and texts to Miro as well."
+    },
+    "api": {
+      "unsupported-file-type": "This file type is not supported and won't be uploaded to Miro.",
+      "success": "Content successfully uploade to Miro.",
+      "error": "An error occured while trying to reach Miro."
+    },
+    "sidebar": {
+      "send-to-miro": "Send to Miro"
+    },
+    "dialog": {
+      "choose-option": "Choose an option:",
+      "send-actor-img": "Actor image",
+      "send-actor-img-name": "Actor image + name",
+      "send-actor-name-sticky": "Actor name (sticky note)",
+      "send-item-img": "Item image",
+      "send-item-img-name": "Item image + name",
+      "send-item-name-sticky": "Item name (sticky note)",
+      "send-journal-img": "Journal image",
+      "send-journal-img-title": "Journal image + title",
+      "send-journal-content": "Journal content",
+      "send-journal-pdf": "PDF associated with journal"
+    }
+  }
+}

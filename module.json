@@ -15,8 +15,23 @@
   "esmodules": ["./modules/module.js"],
   "scripts": [],
   "styles": ["./styles/module.css"],
-  "languages": [],
-  "dependencies": [],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    },
+    {
+      "lang": "fr",
+      "name": "Français",
+      "path": "languages/fr.json"
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "lib-wrapper"
+    }
+  ],
   "minimumCoreVersion": "9",
   "compatibleCoreVersion": "9",
   "url": "https://github.com/DarKDinDoN/foundryvtt-miro-connector",

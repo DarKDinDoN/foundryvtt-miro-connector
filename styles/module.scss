@@ -1,0 +1,7 @@
+#foundryvtt-miro-connector-dialog .window-content .dialog-buttons button {
+  flex: auto;
+
+  &:last-child {
+    margin-right: 5px;
+  }
+}

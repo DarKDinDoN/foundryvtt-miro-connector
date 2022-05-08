@@ -1,0 +1,37 @@
+{
+  "foundryvtt-miro-connector": {
+    "settings": {
+      "display-board-name": "Active le \"board\" Miro",
+      "display-board-hint": "Affiche le \"board\" Miro directement dans Foundry VTT.",
+      "board-id-name": "ID du \"board\" Miro (requis)",
+      "board-id-hint": "Vous pouvez trouver l'identifiant du \"board\" miro dans sont URL : https://miro.com/app/board/IDENTIFIANT/.",
+      "access-token-name": "Token d'accès Miro (nécessaire pour l'utilisation de l'API de Miro et envoyer des données au \"board\")",
+      "access-token-hint": "Vous pouvez trouver ce token en créant un application sur Miro. Générerez un token d'accès sans limite de temps.",
+      "cors-proxy-url-name": "URL du proxy CORS (nécessaire pour l'utilisation de l'API de Miro et envoyer des données au \"board\")",
+      "cors-proxy-url-hint": "Obligatoire pour éviter les problèmes de CORS avec l'API Miro et le navigateur. Toutes les requêtes seront envoyées à travers le proxy cette manière : https://cors-proxy-url/https://miro-api-url/ (le proxy CORS doit être sécurisé en HTTPS).",
+      "player-api-access-name": "Options de déversement accessibles aux joueurs",
+      "player-api-access-hint": "Si activé, les joueurs ont également accès aux fonctionnalités de déversement de contenu vers Miro."
+    },
+    "api": {
+      "unsupported-file-type": "Ce type de fichier n'est pas supporté. Le fichier ne sera pas déversé sur Miro.",
+      "success": "Contenu correctement déversé sur Miro.",
+      "error": "Un problème est survenu pendant la communication avec Miro."
+    },
+    "sidebar": {
+      "send-to-miro": "Déverser sur Miro"
+    },
+    "dialog": {
+      "choose-option": "Choisissez une option :",
+      "send-actor-img": "Image de l'acteur",
+      "send-actor-img-name": "Image de l'acteur + nom",
+      "send-actor-name-sticky": "Nom de l'acteur (post-it)",
+      "send-item-img": "Image de l'objet",
+      "send-item-img-name": "Image de l'objet + nom",
+      "send-item-name-sticky": "Nom de l'objet (post-it)",
+      "send-journal-img": "Image du journal",
+      "send-journal-img-title": "Image du journal + titre",
+      "send-journal-content": "Contenu du journal",
+      "send-journal-pdf": "PDF associé au journal"
+    }
+  }
+}

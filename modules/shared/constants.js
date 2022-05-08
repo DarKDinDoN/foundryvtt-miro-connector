@@ -1,8 +1,21 @@
-const CONSTANTS = {
+/** Module constants */
+export const CONSTANTS = {
   MODULE_NAME: "foundryvtt-miro-connector",
-  MODULE_TITLE: "Foundry VTT Miro Connector"
+  MODULE_TITLE: "Foundry VTT Miro Connector",
+
+  MIRO_API: {
+    ACTOR_ITEM_IMG_HEIGHT: 500,
+    ACTOR_ITEM_NAME_WIDTH_MULTIPLIER: 40,
+
+    CAPTION_FONT_SIZE: 48,
+    CAPTION_MARGIN_TOP: 38,
+    CAPTION_WIDTH_MULTIPLIER: 25,
+
+    JOURNAL_IMG_DOC_WIDTH: 2200,
+    JOURNAL_TEXT_SIZE: 48,
+    JOURNAL_TEXT_WIDTH: 2200,
+    JOURNAL_TEXT_BACKGROUND_COLOR: "#E9D5B4"
+  }
 };
 
 CONSTANTS.PATH = `modules/${CONSTANTS.MODULE_NAME}/`;
-
-export default CONSTANTS;

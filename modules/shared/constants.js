@@ -3,6 +3,10 @@ export const CONSTANTS = {
   MODULE_NAME: "foundryvtt-miro-connector",
   MODULE_TITLE: "Foundry VTT Miro Connector",
 
+  MIRO_lAYER: {
+    DEFAULT_SCENE_NAME: "Miro board"
+  },
+
   MIRO_API: {
     ACTOR_ITEM_IMG_HEIGHT: 500,
     ACTOR_ITEM_NAME_WIDTH_MULTIPLIER: 40,

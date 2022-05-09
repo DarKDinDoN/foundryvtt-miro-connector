@@ -3,7 +3,7 @@
     "settings": {
       "display-board-name": "Activate Miro board",
       "display-board-hint": "Display the board within Foundry VTT.",
-      "board-id-name": "Miro board ID (mandatory)",
+      "board-id-name": "Miro board ID (minimum requirement)",
       "board-id-hint": "You can find the board ID in the URL of you board: https://miro.com/app/board/YOUR-ID-HERE/.",
       "access-token-name": "Miro access token (necessary to use the Miro API and send data to the board)",
       "access-token-hint": "You can find the access token by creating an app. Generate a token without time limit.",
@@ -11,6 +11,9 @@
       "cors-proxy-url-hint": "Mandatory to avoid CORS issues with the Miro API from the browser. All requests will be sent through this proxy this way: https://cors-proxy-url/https://miro-api-url/ (the CORS proxy needs to be secure with HTTPS).",
       "player-api-access-name": "Player can upload to Miro",
       "player-api-access-hint": "If checked, players will be able to upload files and texts to Miro as well."
+    },
+    "layer": {
+      "gm-needed": "A gamemaster must first connect to initialize the Miro board scene (needed only once)."
     },
     "api": {
       "unsupported-file-type": "This file type is not supported and won't be uploaded to Miro.",

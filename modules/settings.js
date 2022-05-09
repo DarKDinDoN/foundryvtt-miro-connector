@@ -2,28 +2,18 @@ import { CONSTANTS } from "./shared/constants.js";
 
 /** Settings global names */
 export const SETTINGS = {
-  DISPLAY_BOARD: "display-board",
   BOARD_ID: "board-id",
+  DISPLAY_BOARD: "display-board",
   ACCESS_TOKEN: "access-token",
   CORS_PROXY_URL: "cors-proxy-url",
-  PLAYER_API_ACCESS: "player-api-access"
+  PLAYER_API_ACCESS: "player-api-access",
+  SCENE_ID: "scene-id"
 };
 
 /**
  * Register settings
  */
 export function registerSettings() {
-  // Display Miro board
-  game.settings.register(CONSTANTS.MODULE_NAME, SETTINGS.DISPLAY_BOARD, {
-    name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.${SETTINGS.DISPLAY_BOARD}-name`),
-    hint: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.${SETTINGS.DISPLAY_BOARD}-hint`),
-    scope: "world",
-    config: true,
-    default: false,
-    type: Boolean,
-    onChange: () => window.location.reload()
-  });
-
   // Board ID Setting
   game.settings.register(CONSTANTS.MODULE_NAME, SETTINGS.BOARD_ID, {
     name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.${SETTINGS.BOARD_ID}-name`),
@@ -32,6 +22,17 @@ export function registerSettings() {
     config: true,
     default: "",
     type: String,
+    onChange: () => window.location.reload()
+  });
+
+  // Display Miro board
+  game.settings.register(CONSTANTS.MODULE_NAME, SETTINGS.DISPLAY_BOARD, {
+    name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.${SETTINGS.DISPLAY_BOARD}-name`),
+    hint: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.${SETTINGS.DISPLAY_BOARD}-hint`),
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean,
     onChange: () => window.location.reload()
   });
 
@@ -70,5 +71,13 @@ export function registerSettings() {
     default: false,
     type: Boolean,
     onChange: () => window.location.reload()
+  });
+
+  // HIDDEN: used for storing the scene ID
+  game.settings.register(CONSTANTS.MODULE_NAME, SETTINGS.SCENE_ID, {
+    scope: "world",
+    config: false,
+    default: "",
+    type: String
   });
 }

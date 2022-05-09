@@ -27,11 +27,7 @@
       "path": "languages/fr.json"
     }
   ],
-  "dependencies": [
-    {
-      "name": "lib-wrapper"
-    }
-  ],
+  "dependencies": [],
   "minimumCoreVersion": "9",
   "compatibleCoreVersion": "9",
   "url": "https://github.com/DarKDinDoN/foundryvtt-miro-connector",

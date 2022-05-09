@@ -7,13 +7,14 @@ A module to embed miro boards within FVTT.
 
 Features:
 
-- Embed a Miro board within Foundry VTT, so you don't have to switch between tabs.
-- Capable of sending actors, items image & name + journal content & image (PDF also) to the board through Miro's API.
+- Embed a Miro board within Foundry VTT, so you don't have to switch between tabs
+- Capable of sending actors, items image & name + journal content & image (PDF also) to the board through Miro's API
 
 Restrictions:
 
-- To display the Miro board within Foundry VTT, one must be logged-in on Miro as well. Meaning, you can't use the native eletron app.
-- To activate the upload features, you need a running server with a domain name and follow some steps explained below.
+- To display the Miro board within Foundry VTT, one must be logged-in on Miro as well. Meaning, you can't use the native eletron app
+- To activate the upload features, you need a running server with a domain name and follow some steps explained below
+- Miro can't handle webp files, so don't try to send webp though the API
 
 ## How-to
 

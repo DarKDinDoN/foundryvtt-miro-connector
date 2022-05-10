@@ -41,9 +41,10 @@ Restrictions:
    1. A simple proxy server for that is: https://github.com/Rob--W/cors-anywhere
    2. You can find a slightly modified version of this same package in the `cors-proxy` folder of this repository
    3. Unzip it somewhere on your server
-   4. You'll need a (sub)domain name and a SSL certificate
-   5. if you use PM2, you can start the server with the following command: `HOST="DOMAIN-NAME" PORT=PORT KEY="PATH-TO-SSL-PRIVATE-KEY (privkey)" CERT="PATH-TO-SSL-CERTIFICATE (fullchain)" WHITELIST="https://DOMAIN-NAME1,https://DOMAIN-NAME2,https://DOMAIN-NAME3" pm2 start /path/to/cors-anywhere/server.js --name "cors-anywhere"`
-   6. A couple of things to note here: you **need** a domain with a SSL certificate for your proxy server. And you can (not mandatory) list some domains that are allowed (WHITELIST) to use this service (typically, your FVTT instance)
+   4. Install the dependencies `npm i`
+   5. You'll need a (sub)domain name and a SSL certificate
+   6. if you use PM2, you can start the server with the following command: `HOST="DOMAIN-NAME" PORT=PORT KEY="PATH-TO-SSL-PRIVATE-KEY (privkey)" CERT="PATH-TO-SSL-CERTIFICATE (fullchain)" WHITELIST="https://DOMAIN-NAME1,https://DOMAIN-NAME2,https://DOMAIN-NAME3" pm2 start /path/to/cors-anywhere/server.js --name "cors-anywhere"`
+   7. A couple of things to note here: you **need** a domain with a SSL certificate for your proxy server. And you can (not mandatory) list some domains that are allowed (WHITELIST) to use this service (typically, your FVTT instance)
 5. Paste the Miro's access token & the cors proxy url in the settings
 6. Activate the setting if you want your players to use this feature as well (they do not require to access your dev team)
 7. Right-click an actor, an item or a journal note in the right sidebar, then click on "Send to Miro"

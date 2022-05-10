@@ -45,6 +45,8 @@ export class EntityHandler {
       // Forced to use jQuery
       if (!this.condition($(item))) continue;
 
+      item.setAttribute("draggable", true);
+
       item.addEventListener("dragstart", (event) => {
         MiroLayer.togglePointerEvents();
 

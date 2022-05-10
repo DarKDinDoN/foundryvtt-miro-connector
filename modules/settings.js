@@ -1,5 +1,7 @@
 import { CONSTANTS } from "./shared/constants.js";
 
+const debouncedReload = foundry.utils.debounce(() => window.location.reload(), 500);
+
 /** Settings global names */
 export const SETTINGS = {
   BOARD_ID: "board-id",
@@ -22,7 +24,7 @@ export function registerSettings() {
     config: true,
     default: "",
     type: String,
-    onChange: () => window.location.reload()
+    onChange: () => debouncedReload()
   });
 
   // Display Miro board
@@ -33,7 +35,7 @@ export function registerSettings() {
     config: true,
     default: false,
     type: Boolean,
-    onChange: () => window.location.reload()
+    onChange: () => debouncedReload()
   });
 
   // Miro Access token setting
@@ -44,7 +46,7 @@ export function registerSettings() {
     config: true,
     default: "",
     type: String,
-    onChange: () => window.location.reload()
+    onChange: () => debouncedReload()
   });
 
   // Cors proxy URL
@@ -55,7 +57,7 @@ export function registerSettings() {
     config: true,
     default: "",
     type: String,
-    onChange: () => window.location.reload()
+    onChange: () => debouncedReload()
   });
 
   // Player API access
@@ -70,7 +72,7 @@ export function registerSettings() {
     config: true,
     default: false,
     type: Boolean,
-    onChange: () => window.location.reload()
+    onChange: () => debouncedReload()
   });
 
   // HIDDEN: used for storing the scene ID

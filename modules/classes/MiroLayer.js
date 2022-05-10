@@ -51,7 +51,10 @@ class _MiroLayer {
           game.i18n.localize(`${CONSTANTS.MODULE_NAME}.layer.gm-needed`)
         );
 
-      scene = await Scene.create({ name: CONSTANTS.MIRO_lAYER.DEFAULT_SCENE_NAME });
+      scene = await Scene.create({
+        name: CONSTANTS.MIRO_lAYER.DEFAULT_SCENE_NAME,
+        tokenVision: false
+      });
       await game.settings.set(CONSTANTS.MODULE_NAME, SETTINGS.SCENE_ID, scene.id);
     }
 

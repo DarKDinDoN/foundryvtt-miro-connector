@@ -15,7 +15,7 @@ Restrictions:
 - To display the Miro board within Foundry VTT, one must be logged-in on Miro as well. Meaning, you can't use the native eletron app
 - To activate the upload features, you need a running server with a domain name and follow some steps explained below
 - Miro can't handle webp files, so don't try to send webp though the API
-- When sending journal notes texts to Miro, you need to manually resize the shape to see the full text
+- When sending a journal entry text to Miro, you need to manually resize the shape to see the full text
 
 ## How-to
 
@@ -47,5 +47,5 @@ Restrictions:
    7. A couple of things to note here: you **need** a domain with a SSL certificate for your proxy server. And you can (not mandatory) list some domains that are allowed (WHITELIST) to use this service (typically, your FVTT instance)
 5. Paste the Miro's access token & the cors proxy url in the settings
 6. Activate the setting if you want your players to use this feature as well (they do not require to access your dev team)
-7. Right-click an actor, an item or a journal note in the right sidebar, then click on "Send to Miro"
+7. Right-click an actor, an item or a journal entry in the right sidebar, then click on "Send to Miro"
 8. Enjoy :)

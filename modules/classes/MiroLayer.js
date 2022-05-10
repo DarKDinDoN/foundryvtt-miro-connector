@@ -1,3 +1,6 @@
+import { ActorHandler } from "../handlers/ActorHandler.js";
+import { ItemHandler } from "../handlers/ItemHandler.js";
+import { JournalEntryHandler } from "../handlers/JournalEntryHandler.js";
 import { SETTINGS } from "../settings.js";
 import { CONSTANTS } from "../shared/constants.js";
 
@@ -18,6 +21,7 @@ class _MiroLayer {
   async init() {
     await this.findOrcreateScene();
     this.createHTMLContainer();
+    this.activateListeners();
     this.registerHooks();
     this._toggleView(canvas);
   }
@@ -90,6 +94,39 @@ class _MiroLayer {
       : document.body.insertBefore(this.html, document.getElementById("pause"));
   }
 
+  /** Add event listeners to the HTML */
+  activateListeners() {
+    this.html.addEventListener("drop", (event) => {
+      let dragData;
+
+      try {
+        dragData = JSON.parse(event.dataTransfer.getData("text/plain"));
+      } catch (err) {
+        dragData = {};
+      }
+
+      if (Object.prototype.hasOwnProperty.call(dragData, CONSTANTS.MODULE_NAME)) {
+        const object = game[dragData[CONSTANTS.MODULE_NAME].type].get(
+          dragData[CONSTANTS.MODULE_NAME].documentId
+        );
+
+        switch (true) {
+          case dragData[CONSTANTS.MODULE_NAME].type === "actors":
+            ActorHandler.showMiroApiOptions(object);
+            break;
+
+          case dragData[CONSTANTS.MODULE_NAME].type === "items":
+            ItemHandler.showMiroApiOptions(object);
+            break;
+
+          case dragData[CONSTANTS.MODULE_NAME].type === "journal":
+            JournalEntryHandler.showMiroApiOptions(object);
+            break;
+        }
+      }
+    });
+  }
+
   /** Register the necessary hooks */
   registerHooks() {
     Hooks.on("collapseSidebar", this._updateiFrameDimensions.bind(this));
@@ -127,6 +164,15 @@ class _MiroLayer {
     document.getElementById("ui-left").style.visibility = "visible";
     document.getElementById("pause").style.visibility = "visible";
     document.getElementById("board").style.display = "block";
+  }
+
+  /** Will toggle the iframe event pointers */
+  togglePointerEvents() {
+    this.iframe.style.pointerEvents = ["", "auto", null, undefined].includes(
+      this.iframe.style.pointerEvents
+    )
+      ? "none"
+      : "auto";
   }
 }
 

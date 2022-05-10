@@ -10,42 +10,49 @@ export class ItemHandler extends EntityHandler {
   static hook = "getItemDirectoryEntryContext";
 
   /** @override */
-  static handler(html, options) {
-    options.push({
-      name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.sidebar.send-to-miro`),
-      icon: '<i class="fas fa-cloud-upload-alt"></i>',
-      condition: () =>
-        !(!game.user.isGM && !game.settings.get(CONSTANTS.MODULE_NAME, SETTINGS.PLAYER_API_ACCESS)),
-      callback: (li) => {
-        const item = game.items.get(li.data("documentId"));
+  static condition() {
+    return !(
+      !game.user.isGM && !game.settings.get(CONSTANTS.MODULE_NAME, SETTINGS.PLAYER_API_ACCESS)
+    );
+  }
 
-        const choices = [];
+  /** @override */
+  static callback(li) {
+    const _li = li.get(0);
+    const item = game.items.get(_li.dataset.documentId);
+    this.showMiroApiOptions(item);
+  }
 
-        if (item.data.img !== window.foundry.data.ItemData.DEFAULT_ICON) {
-          choices.push({
-            id: `item-img`,
-            icon: '<i class="fas fa-portrait"></i> <i class="fas fa-long-arrow-alt-right"></i>',
-            label: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.dialog.send-item-img`),
-            callback: () => MiroAPI.sendActorItemImage(item.data.img)
-          });
+  /**
+   * Show a set of options to send data to Miro for this item
+   * @param {Item} item the item being handled
+   */
+  static showMiroApiOptions(item) {
+    const buttons = [];
 
-          choices.push({
-            id: `item-img-name`,
-            icon: '<i class="fas fa-portrait"></i> <i class="fas fa-plus"></i><i class="fas fa-heading"></i> <i class="fas fa-long-arrow-alt-right"></i>',
-            label: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.dialog.send-item-img-name`),
-            callback: () => MiroAPI.sendActorItemImageWithCaption(item.data.img, item.data.name)
-          });
-        }
+    if (![null, undefined, window.foundry.data.ItemData.DEFAULT_ICON].includes(item.data.img)) {
+      buttons.push({
+        id: `item-img`,
+        icon: '<i class="fas fa-portrait"></i> <i class="fas fa-long-arrow-alt-right"></i>',
+        label: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.dialog.send-item-img`),
+        callback: () => MiroAPI.sendActorItemImage(item.data.img)
+      });
 
-        choices.push({
-          id: `item-name`,
-          icon: '<i class="fas fa-heading"></i> <i class="fas fa-plus"></i> <i class="fas fa-sticky-note"></i> <i class="fas fa-long-arrow-alt-right"></i>',
-          label: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.dialog.send-item-name-sticky`),
-          callback: () => MiroAPI.sendActorItemStickyNote(item.data.name)
-        });
+      buttons.push({
+        id: `item-img-name`,
+        icon: '<i class="fas fa-portrait"></i> <i class="fas fa-plus"></i><i class="fas fa-heading"></i> <i class="fas fa-long-arrow-alt-right"></i>',
+        label: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.dialog.send-item-img-name`),
+        callback: () => MiroAPI.sendActorItemImageWithCaption(item.data.img, item.data.name)
+      });
+    }
 
-        choicesDialog({ buttons: choices });
-      }
+    buttons.push({
+      id: `item-name`,
+      icon: '<i class="fas fa-heading"></i> <i class="fas fa-plus"></i> <i class="fas fa-sticky-note"></i> <i class="fas fa-long-arrow-alt-right"></i>',
+      label: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.dialog.send-item-name-sticky`),
+      callback: () => MiroAPI.sendActorItemStickyNote(item.data.name)
     });
+
+    choicesDialog({ buttons });
   }
 }

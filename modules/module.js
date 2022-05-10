@@ -1,6 +1,8 @@
 import { MiroAPI } from "./classes/MiroAPI.js";
 import { MiroLayer } from "./classes/MiroLayer.js";
-import { SidebarHandler } from "./handlers/SidebarHandler.js";
+import { ActorHandler } from "./handlers/ActorHandler.js";
+import { ItemHandler } from "./handlers/ItemHandler.js";
+import { JournalNoteHandler } from "./handlers/JournalNoteHandler.js";
 import { registerSettings, SETTINGS } from "./settings.js";
 import { CONSTANTS } from "./shared/constants.js";
 import { logger } from "./shared/helpers.js";
@@ -22,7 +24,9 @@ class MiroConnector {
     const accessToken = game.settings.get(CONSTANTS.MODULE_NAME, SETTINGS.ACCESS_TOKEN);
     const corsProxyUrl = game.settings.get(CONSTANTS.MODULE_NAME, SETTINGS.CORS_PROXY_URL);
     if (!accessToken || !corsProxyUrl) return;
-    SidebarHandler.init();
+    ActorHandler.init();
+    ItemHandler.init();
+    JournalNoteHandler.init();
 
     // Make the Miro API public
     setProperty(window, `${CONSTANTS.MODULE_NAME}.MiroAPI`, MiroAPI);

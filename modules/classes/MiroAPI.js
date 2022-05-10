@@ -69,9 +69,9 @@ class _MiroAPI {
    * @param {string} [caption=""] optional caption
    * @param {boolean} [silent=false] notification setting
    */
-  async sendJournalImage(img, caption = "", silent = false) {
+  async sendJournalNoteImage(img, caption = "", silent = false) {
     const response = await this._sendImage(img, {
-      geometry: { width: CONSTANTS.MIRO_API.JOURNAL_IMG_DOC_WIDTH },
+      geometry: { width: CONSTANTS.MIRO_API.JOURNAL_NOTE_IMG_DOC_WIDTH },
       silent
     });
 
@@ -85,20 +85,20 @@ class _MiroAPI {
    * @param {string} img the image path
    * @param {string} caption caption
    */
-  sendJournalImageWithCaption(img, caption) {
+  sendJournalNoteImageWithCaption(img, caption) {
     const silent = true;
-    this.sendJournalImage(img, caption, silent);
+    this.sendJournalNoteImage(img, caption, silent);
   }
 
-  async sendJournalTextContent(content) {
+  async sendJournalNoteTextContent(content) {
     this._sendShape(content, {
       style: {
-        fontSize: CONSTANTS.MIRO_API.JOURNAL_TEXT_SIZE,
+        fontSize: CONSTANTS.MIRO_API.JOURNAL_NOTE_TEXT_SIZE,
         textAlign: "left",
-        fillColor: CONSTANTS.MIRO_API.JOURNAL_TEXT_BACKGROUND_COLOR,
+        fillColor: CONSTANTS.MIRO_API.JOURNAL_NOTE_TEXT_BACKGROUND_COLOR,
         fillOpacity: 1
       },
-      geometry: { width: CONSTANTS.MIRO_API.JOURNAL_TEXT_WIDTH }
+      geometry: { width: CONSTANTS.MIRO_API.JOURNAL_NOTE_TEXT_WIDTH }
     });
   }
 
@@ -107,9 +107,9 @@ class _MiroAPI {
    * @param {string} doc the document path
    * @param {boolean} [silent=false] notification setting
    */
-  async sendJournalDocument(doc, silent = false) {
+  async sendJournalNoteDocument(doc, silent = false) {
     this._sendDocument(doc, {
-      geometry: { width: CONSTANTS.MIRO_API.JOURNAL_IMG_DOC_WIDTH },
+      geometry: { width: CONSTANTS.MIRO_API.JOURNAL_NOTE_IMG_DOC_WIDTH },
       silent
     });
   }

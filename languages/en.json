@@ -31,10 +31,10 @@
       "send-item-img": "Item image",
       "send-item-img-name": "Item image + name",
       "send-item-name-sticky": "Item name (sticky note)",
-      "send-journal-img": "Journal image",
-      "send-journal-img-title": "Journal image + title",
-      "send-journal-content": "Journal content",
-      "send-journal-pdf": "PDF associated with journal"
+      "send-journal-note-img": "Journal image",
+      "send-journal-note-img-title": "Journal image + title",
+      "send-journal-note-content": "Journal content",
+      "send-journal-note-pdf": "PDF associated with journal"
     }
   }
 }

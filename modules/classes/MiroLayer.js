@@ -31,6 +31,11 @@ class _MiroLayer {
     return game.settings.get(CONSTANTS.MODULE_NAME, SETTINGS.BOARD_ID);
   }
 
+  /** @returns {boolean} whether the hotbar should be hidden or not */
+  get hideHotbar() {
+    return game.settings.get(CONSTANTS.MODULE_NAME, SETTINGS.HIDE_HOTBAR);
+  }
+
   /** @type {number} the current sidebar width */
   get sidebarWidth() {
     const sidebar = document.getElementById("ui-right");
@@ -159,6 +164,8 @@ class _MiroLayer {
     document.getElementById("ui-left").style.visibility = "hidden";
     document.getElementById("pause").style.visibility = "hidden";
     document.getElementById("board").style.display = "none";
+
+    if (this.hideHotbar) document.getElementById("ui-bottom").style.visibility = "hidden";
   }
 
   /** Disable container and restore the FVTT UI Components */
@@ -167,6 +174,8 @@ class _MiroLayer {
     document.getElementById("ui-left").style.visibility = "visible";
     document.getElementById("pause").style.visibility = "visible";
     document.getElementById("board").style.display = "block";
+
+    if (this.hideHotbar) document.getElementById("ui-bottom").style.visibility = "visible";
   }
 
   /** Will toggle the iframe event pointers */

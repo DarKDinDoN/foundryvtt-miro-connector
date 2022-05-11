@@ -5,6 +5,8 @@
       "display-board-hint": "Affiche le \"board\" Miro directement dans Foundry VTT.",
       "board-id-name": "ID du \"board\" Miro (minimum requis)",
       "board-id-hint": "Vous pouvez trouver l'identifiant du \"board\" miro dans sont URL : https://miro.com/app/board/IDENTIFIANT/.",
+      "hide-hotbar-name": "Cacher le barre des macros",
+      "hide-hotbar-hint": "Si la barre des macros doit être cachée ou non lors de l'affichage du \"board\" Miro.",
       "access-token-name": "Token d'accès Miro (nécessaire pour l'utilisation de l'API de Miro et envoyer des données au \"board\")",
       "access-token-hint": "Vous pouvez trouver ce token en créant un application sur Miro. Générerez un token d'accès sans limite de temps.",
       "cors-proxy-url-name": "URL du proxy CORS (nécessaire pour l'utilisation de l'API de Miro et envoyer des données au \"board\")",

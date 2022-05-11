@@ -5,6 +5,8 @@
       "display-board-hint": "Display the board within Foundry VTT.",
       "board-id-name": "Miro board ID (minimum requirement)",
       "board-id-hint": "You can find the board ID in the URL of you board: https://miro.com/app/board/YOUR-ID-HERE/.",
+      "hide-hotbar-name": "Hide the hobar",
+      "hide-hotbar-hint": "Whether the hotbar should be hidden when viewing the Miro board.",
       "access-token-name": "Miro access token (necessary to use the Miro API and send data to the board)",
       "access-token-hint": "You can find the access token by creating an app. Generate a token without time limit.",
       "cors-proxy-url-name": "CORS proxy URL (necessary to use the Miro API and send data to the board)",

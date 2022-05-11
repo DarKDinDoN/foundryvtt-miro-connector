@@ -6,6 +6,7 @@ const debouncedReload = foundry.utils.debounce(() => window.location.reload(), 5
 export const SETTINGS = {
   BOARD_ID: "board-id",
   DISPLAY_BOARD: "display-board",
+  HIDE_HOTBAR: "hide-hotbar",
   ACCESS_TOKEN: "access-token",
   CORS_PROXY_URL: "cors-proxy-url",
   PLAYER_API_ACCESS: "player-api-access",
@@ -34,6 +35,17 @@ export function registerSettings() {
     scope: "world",
     config: true,
     default: false,
+    type: Boolean,
+    onChange: () => debouncedReload()
+  });
+
+  // Hide hotbar
+  game.settings.register(CONSTANTS.MODULE_NAME, SETTINGS.HIDE_HOTBAR, {
+    name: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.${SETTINGS.HIDE_HOTBAR}-name`),
+    hint: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.settings.${SETTINGS.HIDE_HOTBAR}-hint`),
+    scope: "world",
+    config: true,
+    default: true,
     type: Boolean,
     onChange: () => debouncedReload()
   });

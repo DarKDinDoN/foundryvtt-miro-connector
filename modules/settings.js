@@ -1,5 +1,6 @@
 import { CONSTANTS } from "./shared/constants.js";
 
+/** Debounce calls before reloading page */
 const debouncedReload = foundry.utils.debounce(() => window.location.reload(), 500);
 
 /** Settings global names */
@@ -13,9 +14,7 @@ export const SETTINGS = {
   SCENE_ID: "scene-id"
 };
 
-/**
- * Register settings
- */
+/** Register settings */
 export function registerSettings() {
   // Board ID Setting
   game.settings.register(CONSTANTS.MODULE_NAME, SETTINGS.BOARD_ID, {

@@ -1,8 +1,13 @@
 {
-  "name": "foundryvtt-miro-connector",
+  "id": "foundryvtt-miro-connector",
   "title": "Foundry VTT Miro Connector",
   "description": "A module to embed miro boards within FVTT.",
   "version": "1.0.0",
+  "compatibility": {
+    "minimum": 10,
+    "verified": "10.274",
+    "maximum": 10
+  },
   "author": "DarkDinDoN",
   "authors": [
     {
@@ -27,9 +32,7 @@
       "path": "languages/fr.json"
     }
   ],
-  "dependencies": [],
-  "minimumCoreVersion": "9",
-  "compatibleCoreVersion": "9",
+  "relationships": {},
   "url": "https://github.com/DarKDinDoN/foundryvtt-miro-connector",
   "bugs": "https://github.com/DarKDinDoN/foundryvtt-miro-connector/issues",
   "changelog": "https://github.com/DarKDinDoN/foundryvtt-miro-connector/releases",

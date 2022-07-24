@@ -90,7 +90,12 @@ class _MiroAPI {
     this.sendJournalEntryImage(img, caption, silent);
   }
 
-  async sendJournalEntryTextContent(content) {
+  /**
+   * Send a journal text
+   * @param {string} content the text being sent
+   * @param {boolean} [silent=false] notification setting
+   */
+  async sendJournalEntryTextContent(content, silent = false) {
     this._sendShape(content, {
       style: {
         fontSize: CONSTANTS.MIRO_API.JOURNAL_ENTRY_TEXT_SIZE,
@@ -98,12 +103,13 @@ class _MiroAPI {
         fillColor: CONSTANTS.MIRO_API.JOURNAL_ENTRY_TEXT_BACKGROUND_COLOR,
         fillOpacity: 1
       },
-      geometry: { width: CONSTANTS.MIRO_API.JOURNAL_ENTRY_TEXT_WIDTH }
+      geometry: { width: CONSTANTS.MIRO_API.JOURNAL_ENTRY_TEXT_WIDTH },
+      silent
     });
   }
 
   /**
-   * Send a journal document, optionnaly with its caption
+   * Send a journal document
    * @param {string} doc the document path
    * @param {boolean} [silent=false] notification setting
    */

@@ -30,19 +30,19 @@ export class ItemHandler extends EntityHandler {
   static showMiroApiOptions(item) {
     const buttons = [];
 
-    if (![null, undefined, window.foundry.data.ItemData.DEFAULT_ICON].includes(item.data.img)) {
+    if (![null, undefined, window.foundry.documents.BaseItem.DEFAULT_ICON].includes(item.img)) {
       buttons.push({
         id: `item-img`,
         icon: '<i class="fas fa-portrait"></i> <i class="fas fa-long-arrow-alt-right"></i>',
         label: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.dialog.send-item-img`),
-        callback: () => MiroAPI.sendActorItemImage(item.data.img)
+        callback: () => MiroAPI.sendActorItemImage(item.img)
       });
 
       buttons.push({
         id: `item-img-name`,
         icon: '<i class="fas fa-portrait"></i> <i class="fas fa-plus"></i><i class="fas fa-heading"></i> <i class="fas fa-long-arrow-alt-right"></i>',
         label: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.dialog.send-item-img-name`),
-        callback: () => MiroAPI.sendActorItemImageWithCaption(item.data.img, item.data.name)
+        callback: () => MiroAPI.sendActorItemImageWithCaption(item.img, item.name)
       });
     }
 
@@ -50,7 +50,7 @@ export class ItemHandler extends EntityHandler {
       id: `item-name`,
       icon: '<i class="fas fa-heading"></i> <i class="fas fa-plus"></i> <i class="fas fa-sticky-note"></i> <i class="fas fa-long-arrow-alt-right"></i>',
       label: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.dialog.send-item-name-sticky`),
-      callback: () => MiroAPI.sendActorItemStickyNote(item.data.name)
+      callback: () => MiroAPI.sendActorItemStickyNote(item.name)
     });
 
     choicesDialog({ buttons });

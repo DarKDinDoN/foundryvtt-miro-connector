@@ -29,7 +29,7 @@ Restrictions:
 ### 2. API (doesn't need the board to be displayed within FVTT)
 
 1. Copy paste the board's ID to the settings: `https://miro.com/app/ID-IS-HERE/`
-2. Register to the new API V2 by creating a dev team (you won't need to invite poeple to this team): https://developers.miro.com/docs/create-a-developer-team-in-miro
+2. Register to the new API V2 by creating a dev team (you won't need to invite poeple to this team): https://miro.com/app/dashboard/?createDevTeam=1
 3. Create a new App: https://miro.com/app/settings/user-profile/apps?featuresOn=PLATFORMV2_BETA_TESTER
    1. Name it
    2. Do not check the expiration checkbox

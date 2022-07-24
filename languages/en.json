@@ -33,10 +33,7 @@
       "send-item-img": "Item image",
       "send-item-img-name": "Item image + name",
       "send-item-name-sticky": "Item name (sticky note)",
-      "send-journal-entry-img": "Journal image",
-      "send-journal-entry-img-title": "Journal image + title",
-      "send-journal-entry-content": "Journal content",
-      "send-journal-entry-pdf": "PDF associated with journal"
+      "send-journal-all-pages": "All pages"
     }
   }
 }

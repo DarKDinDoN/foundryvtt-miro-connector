@@ -1,3 +1,4 @@
+//import { MiroAPI } from "../classes/MiroAPI.js";
 import { MiroAPI } from "../classes/MiroAPI.js";
 import { SETTINGS } from "../settings.js";
 import { CONSTANTS } from "../shared/constants.js";
@@ -16,63 +17,89 @@ export class JournalEntryHandler extends EntityHandler {
 
     const _li = li.get(0);
     const journalEntry = game.journal.get(_li.dataset.documentId);
-    return (
-      journalEntry.data.content ||
-      journalEntry.data.img ||
-      journalEntry.data.flags?.pdfoundry?.PDFData?.url
-    );
+    const pages = this._getContentPages(journalEntry);
+
+    return pages.length > 0;
   }
 
   /** @override */
   static callback(li) {
     const _li = li.get(0);
     const journalEntry = game.journal.get(_li.dataset.documentId);
-    this.showMiroApiOptions(journalEntry);
+    this.showPagesOptions(journalEntry);
   }
 
   /**
-   * Show a set of options to send data to Miro for this journal entry
+   * Show the available pages to be sent to Miro
    * @param {JournalEntry} journalEntry the journal entry being handled
    */
-  static showMiroApiOptions(journalEntry) {
-    const buttons = [];
+  static showPagesOptions(journalEntry) {
+    const pages = this._getContentPages(journalEntry);
 
-    if (journalEntry.data.img) {
+    if (pages.length > 1) {
+      const buttons = [];
+
+      for (const page of pages) {
+        buttons.push({
+          id: `journal-page-${page.id}`,
+          label: `<b>${journalEntry.pages.toObject().findIndex((p) => p._id === page.id)}.</b> ${
+            page.name
+          }`,
+          callback: () => this.sendThroughMiroApi(page)
+        });
+      }
+
       buttons.push({
-        id: `journal-entry-img`,
-        icon: '<i class="fas fa-portrait"></i> <i class="fas fa-long-arrow-alt-right"></i>',
-        label: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.dialog.send-journal-entry-img`),
-        callback: () => MiroAPI.sendJournalEntryImage(journalEntry.data.img)
+        id: `journal-page-all`,
+        label: `<b>${game.i18n.localize(
+          `${CONSTANTS.MODULE_NAME}.dialog.send-journal-all-pages`
+        )}</b>`,
+        callback: () => {
+          for (const [index, page] of pages.entries()) {
+            const silent = index !== pages.length - 1;
+            this.sendThroughMiroApi(page, silent);
+          }
+        }
       });
 
-      buttons.push({
-        id: `journal-entry-img-title`,
-        icon: '<i class="fas fa-portrait"></i> <i class="fas fa-plus"></i><i class="fas fa-heading"></i> <i class="fas fa-long-arrow-alt-right"></i>',
-        label: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.dialog.send-journal-entry-img-title`),
-        callback: () =>
-          MiroAPI.sendJournalEntryImageWithCaption(journalEntry.data.img, journalEntry.data.name)
-      });
+      choicesDialog({ buttons });
+    } else {
+      this.sendThroughMiroApi(pages[0]);
     }
+  }
 
-    if (journalEntry.data.content) {
-      buttons.push({
-        id: `journal-entry-content`,
-        icon: '<i class="fas fa-file-alt"></i> <i class="fas fa-long-arrow-alt-right"></i>',
-        label: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.dialog.send-journal-entry-content`),
-        callback: () => MiroAPI.sendJournalEntryTextContent(journalEntry.data.content)
-      });
+  /**
+   * Send data to Miro depending on page type
+   * @param {JournalEntryPage} page the journal page being handled
+   * @param {boolean} [silent=false] notification setting
+   */
+  static sendThroughMiroApi(page, silent = false) {
+    switch (page.type) {
+      case "text":
+        MiroAPI.sendJournalEntryTextContent(page.text.content, silent);
+        break;
+      case "image":
+        MiroAPI.sendJournalEntryImage(page.src, silent);
+        break;
+      case "pdf":
+        MiroAPI.sendJournalEntryDocument(page.src, silent);
+        break;
     }
+  }
 
-    if (journalEntry.data.flags?.pdfoundry?.PDFData?.url) {
-      buttons.push({
-        id: `journal-entry-pdf`,
-        icon: '<i class="fas fa-file-pdf"></i> <i class="fas fa-long-arrow-alt-right"></i>',
-        label: game.i18n.localize(`${CONSTANTS.MODULE_NAME}.dialog.send-journal-entry-pdf`),
-        callback: () =>
-          MiroAPI.sendJournalEntryDocument(journalEntry.data.flags.pdfoundry.PDFData.url)
-      });
-    }
-
-    choicesDialog({ buttons });
+  /**
+   * Filter the pages of a journal entry
+   * @param {journalEntry} journalEntry the journal entry being filtered
+   * @returns {Array} the filtered array of pages that holds content we can work with
+   */
+  static _getContentPages(journalEntry) {
+    return journalEntry.pages.filter((page) => {
+      return (
+        page.type !== "video" &&
+        ((page.type === "text" && page.text?.content) ||
+          (page.type === "image" && page.src) ||
+          (page.type === "pdf" && page.src))
+      );
+    });
   }
 }

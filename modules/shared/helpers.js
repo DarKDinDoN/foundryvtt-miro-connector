@@ -29,8 +29,8 @@ export const choicesDialog = async ({ buttons }) => {
 
     buttons.forEach((b) => {
       dialogButtons[b.id] = {
-        icon: b.icon,
-        label: b.label,
+        icon: b.icon || "",
+        label: b.label || "",
         callback: (html) => {
           resolve(b.callback(html));
         }

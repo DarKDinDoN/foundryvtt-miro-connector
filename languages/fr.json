@@ -33,10 +33,7 @@
       "send-item-img": "Image de l'objet",
       "send-item-img-name": "Image de l'objet + nom",
       "send-item-name-sticky": "Nom de l'objet (post-it)",
-      "send-journal-entry-img": "Image du journal",
-      "send-journal-entry-img-title": "Image du journal + titre",
-      "send-journal-entry-content": "Contenu du journal",
-      "send-journal-entry-pdf": "PDF associé au journal"
+      "send-journal-all-pages": "Toutes les pages"
     }
   }
 }

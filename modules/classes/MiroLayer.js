@@ -128,7 +128,7 @@ class _MiroLayer {
             break;
 
           case dragData[CONSTANTS.MODULE_NAME].type === "journal":
-            JournalEntryHandler.showMiroApiOptions(object);
+            JournalEntryHandler.showPagesOptions(object);
             break;
         }
       }

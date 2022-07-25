@@ -3,5 +3,5 @@
     "module": "es6",
     "target": "es2021"
   },
-  "exclude": ["node_modules", "**/node_modules/*"]
+  "exclude": ["node_modules", "**/node_modules/*", "libs/*"]
 }

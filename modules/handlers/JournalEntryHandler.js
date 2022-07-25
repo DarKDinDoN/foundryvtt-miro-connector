@@ -74,16 +74,16 @@ export class JournalEntryHandler extends EntityHandler {
    * @param {boolean} [silent=false] notification setting
    */
   static sendThroughMiroApi(page, silent = false) {
-    switch (page.type) {
-      case "text":
-        MiroAPI.sendJournalEntryTextContent(page.text.content, silent);
-        break;
-      case "image":
-        MiroAPI.sendJournalEntryImage(page.src, silent);
-        break;
-      case "pdf":
-        MiroAPI.sendJournalEntryDocument(page.src, silent);
-        break;
+    if (page.type === "text") {
+      MiroAPI.sendJournalEntryTextContent(page.text.content, page.name, silent);
+    }
+
+    if (page.type === "image") {
+      MiroAPI.sendJournalEntryImage(page.src, silent);
+    }
+
+    if (page.type === "pdf") {
+      MiroAPI.sendJournalEntryDocument(page.src, silent);
     }
   }
 

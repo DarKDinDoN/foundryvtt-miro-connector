@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "compatibility": {
     "minimum": 10,
-    "verified": "10.274",
+    "verified": "10.275",
     "maximum": 10
   },
   "author": "DarkDinDoN",
@@ -18,7 +18,7 @@
   ],
   "system": [],
   "esmodules": ["./modules/module.js"],
-  "scripts": [],
+  "scripts": ["./libs/jspdf.umd.min.js", "./libs/html2canvas.js"],
   "styles": ["./styles/module.css"],
   "languages": [
     {

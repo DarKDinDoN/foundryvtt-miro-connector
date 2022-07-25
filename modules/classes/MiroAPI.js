@@ -69,15 +69,11 @@ class _MiroAPI {
    * @param {string} [caption=""] optional caption
    * @param {boolean} [silent=false] notification setting
    */
-  async sendJournalEntryImage(img, caption = "", silent = false) {
-    const response = await this._sendImage(img, {
-      geometry: { width: CONSTANTS.MIRO_API.JOURNAL_ENTRY_IMG_DOC_WIDTH },
+  sendJournalEntryImage(img, silent = false) {
+    this._sendImage(img, {
+      geometry: { width: CONSTANTS.MIRO_API.JOURNAL_ENTRY_DOC_WIDTH },
       silent
     });
-
-    if (caption) {
-      this._addCaption(caption, response);
-    }
   }
 
   /**
@@ -92,18 +88,14 @@ class _MiroAPI {
 
   /**
    * Send a journal text
-   * @param {string} content the text being sent
+   * @param {string} content the content to be sent
+   * @param {string} title the title of the file
    * @param {boolean} [silent=false] notification setting
    */
-  async sendJournalEntryTextContent(content, silent = false) {
-    this._sendShape(content, {
-      style: {
-        fontSize: CONSTANTS.MIRO_API.JOURNAL_ENTRY_TEXT_SIZE,
-        textAlign: "left",
-        fillColor: CONSTANTS.MIRO_API.JOURNAL_ENTRY_TEXT_BACKGROUND_COLOR,
-        fillOpacity: 1
-      },
-      geometry: { width: CONSTANTS.MIRO_API.JOURNAL_ENTRY_TEXT_WIDTH },
+  sendJournalEntryTextContent(content, title, silent = false) {
+    this._sendDocumentAsBlob(content, {
+      title,
+      geometry: { width: CONSTANTS.MIRO_API.JOURNAL_ENTRY_DOC_WIDTH },
       silent
     });
   }
@@ -113,9 +105,9 @@ class _MiroAPI {
    * @param {string} doc the document path
    * @param {boolean} [silent=false] notification setting
    */
-  async sendJournalEntryDocument(doc, silent = false) {
+  sendJournalEntryDocument(doc, silent = false) {
     this._sendDocument(doc, {
-      geometry: { width: CONSTANTS.MIRO_API.JOURNAL_ENTRY_IMG_DOC_WIDTH },
+      geometry: { width: CONSTANTS.MIRO_API.JOURNAL_ENTRY_DOC_WIDTH },
       silent
     });
   }
@@ -126,17 +118,16 @@ class _MiroAPI {
    * @param {object} response json response from the previous call
    */
   _addCaption(caption, response) {
-    const options = {
-      style: {
-        textAlign: "center",
-        fontSize: CONSTANTS.MIRO_API.CAPTION_FONT_SIZE
-      },
-      position: { y: response.geometry.height / 2 + CONSTANTS.MIRO_API.CAPTION_MARGIN_TOP },
-      geometry: { width: caption.length * CONSTANTS.MIRO_API.CAPTION_WIDTH_MULTIPLIER }
-    };
-
     const boldedCaption = `<strong>${caption}</strong>`;
-    this._sendText(boldedCaption, options);
+
+    this._sendStickyNote(boldedCaption, {
+      shape: "rectangle",
+      style: { textAlign: "center", textAlignVertical: "middle" },
+      position: { y: response.geometry.height / 2 + CONSTANTS.MIRO_API.ACTOR_ITEM_NAME_MARGIN_TOP },
+      geometry: {
+        width: caption.length * CONSTANTS.MIRO_API.ACTOR_ITEM_NAME_WIDTH_MULTIPLIER
+      }
+    });
   }
 
   /**
@@ -162,6 +153,46 @@ class _MiroAPI {
       "documents",
       silent
     );
+  }
+
+  /**
+   * Send a document to Miro
+   * @param {string} content the content to be sent
+   * @param {object} options the additional options
+   * @param {string} [options.title] document title (defaults to and empty space)
+   * @param {object} [options.position={}] miro position object
+   * @param {object} [options.geometry={}] miro's geomotry object
+   * @param {boolean} [options.silent=false] notification setting
+   * @returns {Promise<Response>} the API Response
+   */
+  async _sendDocumentAsBlob(content, { title, position = {}, geometry = {}, silent = false } = {}) {
+    const container = document.createElement("div");
+    container.innerHTML = content;
+
+    const { jsPDF } = window.jspdf;
+
+    const doc = new jsPDF({
+      orientation: "p",
+      unit: "px",
+      format: [690, 730],
+      putOnlyUsedFonts: true,
+      hotfixes: ["px_scaling"]
+    });
+
+    doc.html(container, {
+      callback: (doc) => {
+        const blob = doc.output("blob");
+        const fileTitle = `${title}.pdf`;
+
+        this._postFormData(blob, fileTitle, { title, position, geometry }, "documents", silent);
+      },
+      x: 0,
+      y: 0,
+      margin: 20,
+      autoPaging: "text",
+      width: 650,
+      windowWidth: 650
+    });
   }
 
   /**
@@ -272,6 +303,49 @@ class _MiroAPI {
         Authorization: `Bearer ${this.accessToken}`
       },
       body: JSON.stringify(mergeObject({ position: { x: 0, y: 0, origin: "center" } }, data))
+    })
+      .then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          if (!silent) {
+            ui.notifications.info(game.i18n.localize(`${CONSTANTS.MODULE_NAME}.api.success`));
+          }
+          return response.json();
+        } else {
+          const error = new Error(response.statusText);
+          error.response = response;
+          throw error;
+        }
+      })
+      .catch((error) => {
+        ui.notifications.error(game.i18n.localize(`${CONSTANTS.MODULE_NAME}.api.error`));
+        console.error(error);
+      });
+  }
+
+  /**
+   * Post form data to Miro
+   * @param {Blob} blob the file as blob
+   * @param {string} blobTitle the file title
+   * @param {object} data the object holding the data to send to Miro
+   * @param {string} type the file type (according to Miro's documentation)
+   * @param {boolean} [silent=false] wether to display a success message or not
+   * @returns {Promise<Response>} the response object wrapped inside a Promise
+   */
+  async _postFormData(blob, blobTitle, data, type, silent = false) {
+    const formData = new FormData();
+    formData.append("resource", blob, blobTitle);
+    formData.append(
+      "data",
+      JSON.stringify(mergeObject({ position: { x: 0, y: 0, origin: "center" } }, data))
+    );
+
+    return fetch(`${this.corsProxyUrl}https://api.miro.com/v2/boards/${this.boardID}/${type}`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${this.accessToken}`
+      },
+      body: formData
     })
       .then((response) => {
         if (response.status >= 200 && response.status < 300) {

@@ -66,7 +66,6 @@ class _MiroAPI {
   /**
    * Send a journal image, optionnaly with its caption
    * @param {string} img the image path
-   * @param {string} [caption=""] optional caption
    * @param {boolean} [silent=false] notification setting
    */
   sendJournalEntryImage(img, silent = false) {

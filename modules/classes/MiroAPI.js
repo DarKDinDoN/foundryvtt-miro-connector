@@ -58,7 +58,7 @@ class _MiroAPI {
       shape: "rectangle",
       style: { textAlign: "center", textAlignVertical: "middle" },
       geometry: {
-        width: content.length * CONSTANTS.MIRO_API.ACTOR_ITEM_NAME_WIDTH_MULTIPLIER
+        width: content.length * CONSTANTS.MIRO_API.ACTOR_ITEM_NAME_WIDTH
       }
     });
   }
@@ -124,7 +124,7 @@ class _MiroAPI {
       style: { textAlign: "center", textAlignVertical: "middle" },
       position: { y: response.geometry.height / 2 + CONSTANTS.MIRO_API.ACTOR_ITEM_NAME_MARGIN_TOP },
       geometry: {
-        width: caption.length * CONSTANTS.MIRO_API.ACTOR_ITEM_NAME_WIDTH_MULTIPLIER
+        width: caption.length * CONSTANTS.MIRO_API.ACTOR_ITEM_NAME_WIDTH
       }
     });
   }
